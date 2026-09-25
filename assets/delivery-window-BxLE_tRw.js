@@ -1,0 +1,1 @@
+var e=[`jan.`,`fev.`,`mar.`,`abr.`,`mai.`,`jun.`,`jul.`,`ago.`,`set.`,`out.`,`nov.`,`dez.`];function t(t=1,n=3,r=new Date){return "25 de set. a 30 de set."}export{t};
