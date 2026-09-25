@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"/>
+  <title>Fazer pedido | TikTok Shop</title>
+  <meta name="theme-color" content="#ffffff"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"/>
+  
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: #f3f4f6;
+    }
+    .toast-msg {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: rgba(22, 24, 35, 0.95);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 9999px;
+      font-size: 13.5px;
+      font-weight: 600;
+      z-index: 9999;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .toast-msg.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#e5e5e7]">
+  <div id="toast" class="toast-msg"></div>
+
+  <div class="mx-auto min-h-screen w-full max-w-[440px] bg-[#f8f9fa] shadow-[0_0_40px_rgba(0,0,0,0.08)] flex flex-col justify-between">
+    <div class="pb-36">
+      
+      <!-- Top Rating & Security Bar -->
+      <div class="flex items-center justify-between border-b border-[#ececec] bg-[#fdfaf2] px-4 py-2 text-[12px] font-semibold text-[#805b10]">
+        <div class="flex items-center gap-1.5">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span>Ótima avaliação! 4.8/5,0</span>
+        </div>
+        <div class="flex items-center gap-1 text-[11px] text-[#805b10]/90">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Compra 100% Protegida
+        </div>
+      </div>
+
+      <!-- Main Header -->
+      <div class="sticky top-0 z-30 bg-white border-b border-[#ececec]">
+        <div class="relative flex h-12 items-center px-3">
+          <button onclick="goBack(event)" aria-label="Voltar" class="flex h-9 w-9 items-center justify-center rounded-full hover:bg-neutral-100 transition cursor-pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <h1 class="absolute left-1/2 -translate-x-1/2 text-[15px] font-bold text-[#161823]">Resumo do pedido</h1>
+        </div>
+      </div>
+
+      <!-- Address Card -->
+      <div class="relative bg-white pt-3">
+        <!-- Empty State -->
+        <div id="address-empty" class="px-4 pb-3">
+          <a href="endereco.html" onclick="goToAddress(event)" class="flex items-center justify-between text-left group">
+            <div class="flex items-center gap-2.5">
+              <div class="flex h-8 w-8 items-center justify-center rounded-full bg-[#fe2c55]/10 text-[#fe2c55]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <div class="text-[13.5px] font-bold text-[#161823] group-hover:text-[#fe2c55] transition">Adicionar endereço de entrega</div>
+                <div class="text-[11.5px] text-[#8a8b91]">Necessário para calcular frete e prazo</div>
+              </div>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8a8b91" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-0.5 transition"><path d="m9 18 6-6-6-6"/></svg>
+          </a>
+        </div>
+
+        <!-- Filled State -->
+        <div id="address-filled" class="hidden px-4 pb-3">
+          <a href="endereco.html" onclick="goToAddress(event)" class="flex items-start justify-between text-left group">
+            <div class="flex items-start gap-2.5">
+              <div class="mt-0.5 flex h-7 w-7 items-center justify-center rounded-full bg-[#e7f7f5] text-[#00b8a9] shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-[#00b8a9] bg-[#e7f7f5] px-1.5 py-0.5 rounded">Padrão</span>
+                  <span id="addr-name-phone" class="text-[13px] font-bold text-[#161823]"></span>
+                </div>
+                <div id="addr-full-text" class="mt-1 text-[12px] text-[#5a5b60] leading-snug"></div>
+              </div>
+            </div>
+            <span class="mt-1 text-[11.5px] font-semibold text-[#fe2c55] shrink-0">Editar</span>
+          </a>
+        </div>
+
+        <!-- TikTok Color Ribbon Pattern Strip -->
+        <svg class="block w-full h-[3px]" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+          <defs>
+            <pattern id="tt-ribbon" x="0" y="0" width="64" height="4" patternUnits="userSpaceOnUse">
+              <rect x="2" y="0.75" width="26" height="2.5" rx="0.5" fill="#25f4ee" transform="skewX(-20)"></rect>
+              <rect x="34" y="0.75" width="26" height="2.5" rx="0.5" fill="#fe2c55" transform="skewX(-20)"></rect>
+            </pattern>
+          </defs>
+          <rect width="100%" height="4" fill="url(#tt-ribbon)"></rect>
+        </svg>
+      </div>
+
+      <!-- Product Section -->
+      <div class="bg-white px-4 pt-2.5 pb-3">
+        <div class="flex items-center justify-between">
+          <div class="text-[14px] font-bold text-[#161823]">Monster E Bikes Oficial</div>
+          <button class="flex items-center gap-0.5 text-[12px] text-[#8a8b91]">
+            Adicionar nota
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
+
+        <div class="mt-2.5 flex items-center gap-2.5">
+          <img id="product-main-img" src="https://v9max.clubedacolecao.com/__l5e/assets-v1/a07af9ab-ccef-40e7-b17a-9f386ed2e21c/bike-main-800.webp" alt="Bicicleta Bike Elétrica V9 Max" class="h-[80px] w-[80px] shrink-0 rounded-md object-cover bg-[#f5f5f5] border border-[#f0f0f0]"/>
+          <div class="min-w-0 flex-1">
+            <div class="truncate text-[12.5px] leading-snug text-[#161823] font-semibold">[MONSTER] Bicicleta Bike Elétrica V9 Max 1000W 48km |...</div>
+            <div class="mt-1 flex flex-col items-start gap-1">
+              <div class="inline-flex overflow-hidden rounded-[3px]">
+                <div class="flex items-center gap-0.5 bg-[#fe2c55] px-[7px] py-[2px] text-[8.5px] font-semibold text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="white" stroke="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  <span>Oferta Relâmpago</span>
+                </div>
+                <div id="flash-timer" class="flex items-center bg-[#fff0f3] px-[7px] py-[2px] text-[8.5px] font-semibold text-[#fe2c55] tabular-nums">23:59:10</div>
+              </div>
+              <span class="inline-flex h-[14px] items-center gap-[2px] rounded-[3px] bg-[#f7f7f7] px-[3px] text-[8.3px] font-extrabold leading-none text-[#333333]">
+                <svg width="9" height="9" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0"><circle cx="6.5" cy="6.5" r="6.15" fill="#EAB934"/><path d="M4 6.55L5.85 8.55L9.2 5" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Devolução gratuita
+              </span>
+            </div>
+
+            <div class="mt-1.5 flex items-end justify-between gap-2">
+              <div class="min-w-0">
+                <div class="flex items-center gap-1 text-[#fe2c55]">
+                  <span id="unit-price-display" class="text-[16px] font-extrabold leading-none">R$ 89,75</span>
+                </div>
+                <div class="mt-0.5 flex items-center gap-1 text-[10.5px] text-[#8a8b91]">
+                  <span class="line-through">R$ 899,90</span>
+                  <span class="rounded bg-[#ffe9ec] px-1 py-[1px] font-semibold text-[#fe2c55]">-90%</span>
+                </div>
+              </div>
+              
+              <!-- Quantity Selector -->
+              <div class="flex items-center gap-0 text-[13px] text-[#161823]">
+                <button onclick="changeQty(-1)" class="flex h-6 w-6 items-center justify-center rounded-l-[4px] bg-[#f1f1f2] text-[16px] leading-none text-[#161823] active:bg-[#e0e0e0] cursor-pointer" aria-label="Diminuir">−</button>
+                <span id="qty-val" class="flex h-6 w-8 items-center justify-center bg-[#f1f1f2] text-[12px] tabular-nums font-semibold">1</span>
+                <button onclick="changeQty(1)" class="flex h-6 w-6 items-center justify-center rounded-r-[4px] bg-[#f1f1f2] text-[16px] leading-none text-[#161823] active:bg-[#e0e0e0] cursor-pointer" aria-label="Aumentar">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3 flex items-center justify-between rounded-md bg-[#e7f7f5] px-2.5 py-1.5 text-[11.5px]">
+          <span class="text-[#161823]">Receba até 3 a 5 dias úteis</span>
+          <span class="flex items-center gap-1.5">
+            <span class="text-[#8a8b91] line-through">R$ 149,90</span>
+            <b class="text-[#161823]">Grátis</b>
+          </span>
+        </div>
+      </div>
+
+      <!-- Coupon Row -->
+      <div class="mt-2 flex w-full items-center justify-between bg-white px-4 py-[9px]">
+        <div class="flex items-center gap-[6px] text-[13px] font-extrabold leading-none text-[#161823]">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#d81d57" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.4 8.05V10.15C19.38 10.34 18.64 11.08 18.64 12C18.64 12.92 19.38 13.66 20.4 13.85V15.95C20.4 16.53 19.93 17 19.35 17H4.65C4.07 17 3.6 16.53 3.6 15.95V13.85C4.62 13.66 5.36 12.92 5.36 12C5.36 11.08 4.62 10.34 3.6 10.15V8.05C3.6 7.47 4.07 7 4.65 7H19.35C19.93 7 20.4 7.47 20.4 8.05Z"/><path d="M8.35 12.1L10.55 14.3L15.75 9.3"/></svg>
+          Desconto do TikTok Shop
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span class="rounded bg-[#e7f7f5] px-1.5 py-0.5 text-[10.5px] font-semibold text-[#00b8a9]">Frete grátis</span>
+          <span class="rounded bg-[#ffe9ec] px-1.5 py-0.5 text-[10.5px] font-semibold text-[#fe2c55]">- R$ 810,15</span>
+        </div>
+      </div>
+
+      <!-- Order Bumps Section / Acessórios com Super Desconto -->
+      <div class="mt-2 bg-white px-4 py-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-1.5 text-[13px] font-bold text-[#161823]">
+            <span class="text-[#fe2c55]">🔥</span>
+            <span>Acessórios recomendados (Opcional)</span>
+          </div>
+          <span class="rounded bg-[#ffe9ec] px-1.5 py-0.5 text-[10px] font-bold text-[#fe2c55]">Até 75% OFF</span>
+        </div>
+        <p class="mt-0.5 text-[11px] text-[#8a8b91]">Adicione ao pedido com 1 clique e aproveite o mesmo frete grátis:</p>
+
+        <div class="mt-2.5 space-y-2">
+          <!-- Bump 1: Mini Bomba de Ar Portátil -->
+          <label class="bump-card flex items-center justify-between gap-2.5 rounded-lg border border-[#e5e5e7] p-2.5 transition hover:border-[#fe2c55]/40 cursor-pointer bg-white" data-bump-id="bump-bomba">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <input type="checkbox" id="bump-bomba" onchange="toggleCheckoutBump(this)" class="checkout-bump-check h-4 w-4 rounded text-[#fe2c55] accent-[#fe2c55] focus:ring-[#fe2c55]" data-price="19.90" data-original-price="59.90" data-name="Mini Bomba de Ar Portátil" data-img="https://v9max.clubedacolecao.com/__l5e/assets-v1/3a83508a-02a8-4b60-b3f0-e3ab56ca4c96/mini-bomba-portatil.webp"/>
+              <img src="https://v9max.clubedacolecao.com/__l5e/assets-v1/3a83508a-02a8-4b60-b3f0-e3ab56ca4c96/mini-bomba-portatil.webp" alt="Mini Bomba" class="h-11 w-11 rounded-md object-cover border border-[#eee] shrink-0"/>
+              <div class="text-left leading-tight min-w-0">
+                <div class="truncate text-[12px] font-bold text-[#161823]">Mini Bomba de Ar Portátil</div>
+                <div class="text-[10.5px] text-[#8a8b91]">Enche até 120 PSI rápido</div>
+              </div>
+            </div>
+            <div class="text-right shrink-0">
+              <div class="text-[12.5px] font-extrabold text-[#fe2c55]">+ R$ 19,90</div>
+              <div class="text-[10px] text-[#8a8b91] line-through">R$ 59,90</div>
+            </div>
+          </label>
+
+          <!-- Bump 2: Cadeado Antifurto c/ Alarme -->
+          <label class="bump-card flex items-center justify-between gap-2.5 rounded-lg border border-[#e5e5e7] p-2.5 transition hover:border-[#fe2c55]/40 cursor-pointer bg-white" data-bump-id="bump-cadeado">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <input type="checkbox" id="bump-cadeado" onchange="toggleCheckoutBump(this)" class="checkout-bump-check h-4 w-4 rounded text-[#fe2c55] accent-[#fe2c55] focus:ring-[#fe2c55]" data-price="12.90" data-original-price="49.90" data-name="Cadeado Antifurto c/ Alarme 110dB" data-img="https://v9max.clubedacolecao.com/__l5e/assets-v1/19be3402-aba0-4794-9802-8aa217824faa/cadeado-antifurto-alarme.webp"/>
+              <img src="https://v9max.clubedacolecao.com/__l5e/assets-v1/19be3402-aba0-4794-9802-8aa217824faa/cadeado-antifurto-alarme.webp" alt="Cadeado Alarme" class="h-11 w-11 rounded-md object-cover border border-[#eee] shrink-0"/>
+              <div class="text-left leading-tight min-w-0">
+                <div class="truncate text-[12px] font-bold text-[#161823]">Cadeado Antifurto c/ Alarme 110dB</div>
+                <div class="text-[10.5px] text-[#8a8b91]">Aço temperado blindado</div>
+              </div>
+            </div>
+            <div class="text-right shrink-0">
+              <div class="text-[12.5px] font-extrabold text-[#fe2c55]">+ R$ 12,90</div>
+              <div class="text-[10px] text-[#8a8b91] line-through">R$ 49,90</div>
+            </div>
+          </label>
+
+          <!-- Bump 3: Capacete Urbano Premium LED -->
+          <label class="bump-card flex items-center justify-between gap-2.5 rounded-lg border border-[#e5e5e7] p-2.5 transition hover:border-[#fe2c55]/40 cursor-pointer bg-white" data-bump-id="bump-capacete">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <input type="checkbox" id="bump-capacete" onchange="toggleCheckoutBump(this)" class="checkout-bump-check h-4 w-4 rounded text-[#fe2c55] accent-[#fe2c55] focus:ring-[#fe2c55]" data-price="29.90" data-original-price="89.90" data-name="Capacete Urbano Premium LED" data-img="https://v9max.clubedacolecao.com/__l5e/assets-v1/9171c12d-a8f0-48f2-b272-2dedc5e2c579/capacete-urbano-premium.webp"/>
+              <img src="https://v9max.clubedacolecao.com/__l5e/assets-v1/9171c12d-a8f0-48f2-b272-2dedc5e2c579/capacete-urbano-premium.webp" alt="Capacete LED" class="h-11 w-11 rounded-md object-cover border border-[#eee] shrink-0"/>
+              <div class="text-left leading-tight min-w-0">
+                <div class="truncate text-[12px] font-bold text-[#161823]">Capacete Urbano Premium LED</div>
+                <div class="text-[10.5px] text-[#8a8b91]">Sinalização noturna recarregável</div>
+              </div>
+            </div>
+            <div class="text-right shrink-0">
+              <div class="text-[12.5px] font-extrabold text-[#fe2c55]">+ R$ 29,90</div>
+              <div class="text-[10px] text-[#8a8b91] line-through">R$ 89,90</div>
+            </div>
+          </label>
+
+          <!-- Bump 4: Rastreador Inteligente Bluetooth -->
+          <label class="bump-card flex items-center justify-between gap-2.5 rounded-lg border border-[#e5e5e7] p-2.5 transition hover:border-[#fe2c55]/40 cursor-pointer bg-white" data-bump-id="bump-rastreador">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <input type="checkbox" id="bump-rastreador" onchange="toggleCheckoutBump(this)" class="checkout-bump-check h-4 w-4 rounded text-[#fe2c55] accent-[#fe2c55] focus:ring-[#fe2c55]" data-price="9.90" data-original-price="39.90" data-name="Rastreador Inteligente Bluetooth" data-img="https://v9max.clubedacolecao.com/__l5e/assets-v1/6993c843-5145-4719-9d44-727ff3bb519e/rastreador-bluetooth.webp"/>
+              <img src="https://v9max.clubedacolecao.com/__l5e/assets-v1/6993c843-5145-4719-9d44-727ff3bb519e/rastreador-bluetooth.webp" alt="Rastreador" class="h-11 w-11 rounded-md object-cover border border-[#eee] shrink-0"/>
+              <div class="text-left leading-tight min-w-0">
+                <div class="truncate text-[12px] font-bold text-[#161823]">Rastreador Inteligente Bluetooth</div>
+                <div class="text-[10.5px] text-[#8a8b91]">Localize sua bike pelo celular</div>
+              </div>
+            </div>
+            <div class="text-right shrink-0">
+              <div class="text-[12.5px] font-extrabold text-[#fe2c55]">+ R$ 9,90</div>
+              <div class="text-[10px] text-[#8a8b91] line-through">R$ 39,90</div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Order Summary (Resumo do Pedido) -->
+      <div class="mt-2 bg-white px-4 py-3">
+        <div class="text-[14px] font-semibold">Resumo do pedido</div>
+        <div class="mt-3 space-y-2 text-[13px]">
+          <div class="flex items-center justify-between font-semibold">
+            <span>Subtotal do produto</span>
+            <span id="subtotal-display">R$ 89,75</span>
+          </div>
+          <div class="flex items-center justify-between pl-3 text-[13px]">
+            <span class="text-[#5a5b60]">Preço original</span>
+            <span id="original-total-display">R$ 899,90</span>
+          </div>
+          <div class="flex items-center justify-between pl-3 text-[13px]">
+            <span class="text-[#5a5b60]">Desconto no produto</span>
+            <span id="discount-display" class="text-[#fe2c55]">- R$ 810,15</span>
+          </div>
+
+          <!-- Dynamic Bumps Subtotal in Summary -->
+          <div id="bumps-summary-container" class="hidden border-t border-dashed border-[#eee] pt-2 space-y-1.5">
+            <div class="text-[12px] font-semibold text-[#161823]">Acessórios adicionados:</div>
+            <div id="bumps-summary-list" class="space-y-1"></div>
+          </div>
+
+          <div class="flex items-center justify-between pt-1 font-semibold">
+            <span>Subtotal do envio</span>
+            <span>R$ 0,00</span>
+          </div>
+          <div class="flex items-center justify-between pl-3 text-[13px]">
+            <span class="text-[#5a5b60]">Taxa de envio</span>
+            <span>R$ 149,90</span>
+          </div>
+          <div class="flex items-center justify-between pl-3 text-[13px]">
+            <span class="text-[#5a5b60]">Desconto de envio</span>
+            <span class="text-[#fe2c55]">- R$ 149,90</span>
+          </div>
+        </div>
+
+        <div class="my-3 h-px bg-[#f0f0f0]"></div>
+        <div class="flex items-start justify-between">
+          <div class="text-[16px] font-bold">Total</div>
+          <div class="text-right">
+            <div id="total-summary-display" class="text-[17px] font-bold">R$ 89,75</div>
+            <div class="text-[11px] text-[#8a8b91]">Impostos inclusos</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Method -->
+      <div class="mt-2 bg-white px-4 py-3">
+        <div class="text-[14px] font-semibold">Forma de pagamento</div>
+        <div class="mt-3 flex w-full items-start justify-between text-left">
+          <div class="flex flex-1 items-start gap-2.5">
+            <div class="mt-0.5">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00b8a9" stroke-width="2"><polygon points="12 2 22 12 12 22 2 12 12 2"/></svg>
+            </div>
+            <div class="flex-1">
+              <div class="text-[13px] font-bold">Pix</div>
+              <div class="mt-1 text-[11px] text-[#5a5b60]">Pagamento instantâneo · Aprovação em segundos</div>
+            </div>
+          </div>
+          <span class="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full border-2 border-[#fe2c55] bg-[#fe2c55]">
+            <span class="h-2 w-2 rounded-full bg-white"></span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Terms -->
+      <div class="mt-2 bg-[#f5f5f5] px-4 py-3 text-[11px] leading-relaxed text-[#5a5b60]">
+        Ao fazer um pedido, você concorda com <span class="font-semibold text-[#161823]">Termos de uso e venda do TikTok Shop</span> e reconhece que leu a <span class="font-semibold text-[#161823]">Política de privacidade do TikTok</span>.
+      </div>
+
+      <!-- Bottom Fixed Action Bar -->
+      <div class="fixed inset-x-0 bottom-0 z-40 mx-auto max-w-[440px] bg-white pb-[max(env(safe-area-inset-bottom),6px)] shadow-[0_-1px_0_rgba(0,0,0,0.06)] border-t border-[#f0f0f0]">
+        <div class="flex items-center gap-1.5 bg-[#fff0f3] px-4 py-1 text-[11.5px] font-semibold text-[#fe2c55] whitespace-nowrap">
+          <span class="truncate">Você está economizando <b id="savings-display">R$ 960,05</b> nesse pedido.</span>
+        </div>
+        <div class="flex items-center justify-between px-4 pt-1.5">
+          <div id="items-count-display" class="text-[14px] font-bold text-[#161823]">Total (1 item)</div>
+          <div id="footer-total-display" class="text-[17px] font-extrabold text-[#fe2c55]">R$ 89,75</div>
+        </div>
+        <div class="px-4 pt-1">
+          <button id="btn-fazer-pedido" onclick="handleFazerPedido(event)" class="relative w-full rounded-full bg-[#fe2c55] hover:bg-[#e0264b] py-2.5 text-center text-white shadow-md transition active:scale-[0.99] cursor-pointer">
+            <div class="text-[15px] font-bold leading-tight">Fazer pedido</div>
+            <div id="coupon-exp-text" class="mt-0.5 text-[10.5px] font-semibold leading-tight opacity-95">O cupom expira em 23:59:10</div>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const UNIT_PRICE = 89.75;
+    const ORIGINAL_PRICE = 899.90;
+    const SHIPPING_PRICE = 149.90;
+    let qty = 1;
+    let hasAddress = false;
+
+    function getQueryString() {
+      var s = window.location.search;
+      if (!s || s.length <= 1) {
+        s = sessionStorage.getItem('tiktok_search') || localStorage.getItem('tiktok_search') || '';
+      }
+      return (s && !s.startsWith('?')) ? ('?' + s) : s;
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    function formatBRL(val) {
+      return 'R$ ' + val.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function toggleCheckoutBump(checkbox) {
+      const card = checkbox.closest('.bump-card');
+      if (card) {
+        if (checkbox.checked) {
+          card.classList.add('border-[#fe2c55]', 'bg-[#fff0f3]/50');
+          card.classList.remove('border-[#e5e5e7]', 'bg-white');
+        } else {
+          card.classList.remove('border-[#fe2c55]', 'bg-[#fff0f3]/50');
+          card.classList.add('border-[#e5e5e7]', 'bg-white');
+        }
+      }
+      updateCalculations();
+    }
+
+    function updateCalculations() {
+      const selectedBumps = [];
+      let bumpsTotal = 0;
+      let bumpsOriginalTotal = 0;
+
+      document.querySelectorAll('.checkout-bump-check:checked').forEach(cb => {
+        const price = parseFloat(cb.getAttribute('data-price') || 0);
+        const origPrice = parseFloat(cb.getAttribute('data-original-price') || (price * 3));
+        const name = cb.getAttribute('data-name');
+        const img = cb.getAttribute('data-img');
+        selectedBumps.push({ id: cb.id, name, price, origPrice, img });
+        bumpsTotal += price;
+        bumpsOriginalTotal += origPrice;
+      });
+
+      const productSubtotal = UNIT_PRICE * qty;
+      const productOriginalTotal = ORIGINAL_PRICE * qty;
+      const productDiscount = (ORIGINAL_PRICE - UNIT_PRICE) * qty;
+
+      const grandTotal = productSubtotal + bumpsTotal;
+      const grandOriginal = productOriginalTotal + bumpsOriginalTotal;
+      const grandDiscount = productDiscount + (bumpsOriginalTotal - bumpsTotal);
+      const totalSavings = grandDiscount + SHIPPING_PRICE;
+      const totalItemsCount = qty + selectedBumps.length;
+
+      document.getElementById('qty-val').textContent = qty;
+      document.getElementById('subtotal-display').textContent = formatBRL(productSubtotal);
+      document.getElementById('original-total-display').textContent = formatBRL(productOriginalTotal);
+      document.getElementById('discount-display').textContent = '- ' + formatBRL(productDiscount);
+      
+      // Update Bumps in Summary
+      const summaryContainer = document.getElementById('bumps-summary-container');
+      const summaryList = document.getElementById('bumps-summary-list');
+      if (selectedBumps.length > 0) {
+        summaryContainer.classList.remove('hidden');
+        summaryList.innerHTML = selectedBumps.map(b => `
+          <div class="flex items-center justify-between pl-2 text-[12px]">
+            <span class="text-[#5a5b60] truncate pr-2">+ ${b.name}</span>
+            <span class="font-semibold text-[#161823] shrink-0">${formatBRL(b.price)}</span>
+          </div>
+        `).join('');
+      } else {
+        summaryContainer.classList.add('hidden');
+        summaryList.innerHTML = '';
+      }
+
+      document.getElementById('total-summary-display').textContent = formatBRL(grandTotal);
+      document.getElementById('footer-total-display').textContent = formatBRL(grandTotal);
+      document.getElementById('savings-display').textContent = formatBRL(totalSavings);
+      document.getElementById('items-count-display').textContent = 'Total (' + totalItemsCount + ' ' + (totalItemsCount === 1 ? 'item' : 'itens') + ')';
+
+      // Persist state into localStorage for Pagamento PIX
+      try {
+        let currentOrder = {};
+        const stored = localStorage.getItem('tiktokshop:order');
+        if (stored) currentOrder = JSON.parse(stored);
+        currentOrder.qty = qty;
+        currentOrder.productPrice = UNIT_PRICE;
+        currentOrder.bumps = selectedBumps;
+        currentOrder.total = grandTotal;
+        localStorage.setItem('tiktokshop:order', JSON.stringify(currentOrder));
+
+        let v9Order = {};
+        const storedV9 = localStorage.getItem('v9_order_data');
+        if (storedV9) v9Order = JSON.parse(storedV9);
+        v9Order.bumps = selectedBumps;
+        v9Order.total = grandTotal;
+        localStorage.setItem('v9_order_data', JSON.stringify(v9Order));
+      } catch (e) {}
+    }
+
+    function changeQty(delta) {
+      qty = Math.max(1, Math.min(99, qty + delta));
+      updateCalculations();
+    }
+
+    function loadOrderState() {
+      try {
+        const stored = localStorage.getItem('tiktokshop:order');
+        if (stored) {
+          const o = JSON.parse(stored);
+          if (o.qty) qty = o.qty;
+          if (o.address && o.address.nome && o.address.endereco) {
+            hasAddress = true;
+            const a = o.address;
+            document.getElementById('address-empty').classList.add('hidden');
+            document.getElementById('address-filled').classList.remove('hidden');
+            
+            const maskedPhone = a.telefone ? (' (+55)' + a.telefone.replace(/\D/g, '').slice(0, 2) + '***') : '';
+            document.getElementById('addr-name-phone').textContent = (a.nome || '') + maskedPhone;
+            document.getElementById('addr-full-text').textContent = (a.endereco || '') + ', ' + (a.numero || '') + ' - ' + (a.bairro || '') + ', ' + (a.cidade || '') + ' - ' + (a.estado || '') + ', ' + (a.cep || '');
+          }
+
+          // Restore checked bumps if passed from previous page
+          if (Array.isArray(o.bumps) && o.bumps.length > 0) {
+            o.bumps.forEach(bump => {
+              const cb = document.getElementById(bump.id);
+              if (cb) {
+                cb.checked = true;
+                const card = cb.closest('.bump-card');
+                if (card) {
+                  card.classList.add('border-[#fe2c55]', 'bg-[#fff0f3]/50');
+                  card.classList.remove('border-[#e5e5e7]', 'bg-white');
+                }
+              }
+            });
+          }
+        }
+      } catch (e) {}
+      updateCalculations();
+    }
+
+    function goBack(e) {
+      if (e) e.preventDefault();
+      window.location.href = 'index.html' + getQueryString();
+    }
+
+    function goToAddress(e) {
+      if (e) e.preventDefault();
+      window.location.href = 'endereco.html' + getQueryString();
+    }
+
+    function handleFazerPedido(event) {
+      if (event) event.preventDefault();
+
+      if (!hasAddress) {
+        showToast('Por favor, preencha seu endereço de entrega');
+        setTimeout(() => {
+          window.location.href = 'endereco.html' + getQueryString();
+        }, 300);
+        return;
+      }
+
+      showToast('Gerando PIX com desconto seguro...', '🔒');
+      setTimeout(() => {
+        window.location.href = 'pagamento.html' + getQueryString();
+      }, 500);
+    }
+
+    function initTimer() {
+      let now = new Date();
+      let midnight = new Date(now);
+      midnight.setHours(24, 0, 0, 0);
+      let diff = Math.floor((midnight - now) / 1000);
+
+      setInterval(() => {
+        if (diff > 0) diff--;
+        let h = Math.floor(diff / 3600).toString().padStart(2, '0');
+        let m = Math.floor((diff % 3600) / 60).toString().padStart(2, '0');
+        let s = (diff % 60).toString().padStart(2, '0');
+        const str = h + ':' + m + ':' + s;
+        const el1 = document.getElementById('flash-timer');
+        const el2 = document.getElementById('coupon-exp-text');
+        if (el1) el1.textContent = str;
+        if (el2) el2.textContent = 'O cupom expira em ' + str;
+      }, 1000);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadOrderState();
+      initTimer();
+    });
+  </script>
+</body>
+</html>

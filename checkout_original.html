@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"/>
+  <title>Finalizar pedido | TikTok Shop</title>
+  <meta name="theme-color" content="#ffffff"/>
+  <link rel="stylesheet" href="assets/styles-DfAX3eke.css"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"/>
+  <link rel="icon" href="favicon.png" type="image/png"/>
+
+  <script>
+  (function() {
+    var p = window.location.pathname;
+    if (p.endsWith('.html')) {
+      window.location.replace(p.slice(0, -5) + window.location.search + window.location.hash);
+    }
+  })();
+  </script>
+
+  <!-- TikTok Pixel Code Start -->
+  <script>
+  !function (w, d, t) {
+    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+  var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+  ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+    ttq.load('DAIARBRC77U3EU7G889G');
+    ttq.page();
+    ttq.track('InitiateCheckout', {
+      content_id: 'prod_0c10f31f770de5d8',
+      content_type: 'product',
+      content_name: '[SOARFLY] Kit Ferramentas 4 em 1 48Vf',
+      quantity: 1,
+      price: 97.90,
+      value: 97.90,
+      currency: 'BRL'
+    });
+  }(window, document, 'ttq');
+  </script>
+  <!-- TikTok Pixel Code End -->
+
+  <!-- UTM Preservation Script -->
+  <script>
+    (function() {
+      var qs = window.location.search;
+      if (qs && qs.length > 1) {
+        try {
+          sessionStorage.setItem('tiktok_search', qs);
+          localStorage.setItem('tiktok_search', qs);
+        } catch(e) {}
+      }
+    })();
+  </script>
+
+  <style>
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background-color: #f5f5f5; }
+    .toast-msg {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: rgba(22, 24, 35, 0.95);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      z-index: 9999;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .toast-msg.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+  </style>
+</head>
+<body class="min-h-screen bg-[#e5e5e7]">
+  <div id="toast" class="toast-msg">Mensagem</div>
+
+  <div class="mx-auto min-h-screen w-full max-w-[440px] bg-white shadow-[0_0_40px_rgba(0,0,0,0.08)]">
+    <div class="relative min-h-screen bg-[#f5f5f5] pb-[112px]">
+      
+      <!-- Top Bar -->
+      <div class="sticky top-0 z-30 bg-white">
+        <div class="relative flex h-11 items-center px-2">
+          <a id="btn-back" aria-label="Voltar" href="/ferramenta" onclick="goBack(event)" class="grid h-9 w-9 place-items-center cursor-pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="h-[22px] w-[22px] text-[#161823]"><path d="m15 18-6-6 6-6"/></svg>
+          </a>
+          <div class="pointer-events-none absolute left-1/2 -translate-x-1/2 flex items-center gap-1 text-[14px] font-semibold text-[#161823]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-[13px] w-[13px] fill-[#f2b900] text-[#f2b900]"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Ótima avaliação! 4.8/5,0
+          </div>
+        </div>
+        <div class="h-px bg-[#f0f0f0]"></div>
+      </div>
+
+      <!-- Address Box (Dynamic) -->
+      <a id="address-box" href="/endereco" onclick="goToAddress(event)" class="block bg-white px-4 py-3.5 border-b border-[#f0f0f0] transition hover:bg-neutral-50 cursor-pointer">
+        <div id="address-empty" class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="h-[18px] w-[18px] text-[#161823]"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+            <span class="text-[15px] font-bold text-[#161823]">Endereço de envio</span>
+          </div>
+          <div class="flex items-center gap-0.5 text-[14px] font-semibold text-[#fe2c55]">
+            <span class="text-[16px] leading-none">+</span>
+            <span>Adicionar endereço</span>
+          </div>
+        </div>
+
+        <div id="address-filled" class="hidden flex items-start gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="mt-1 h-[18px] w-[18px] shrink-0 text-[#161823]"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+          <div class="flex-1 text-[15px] leading-snug">
+            <div id="addr-name-phone" class="text-[14px] font-bold text-[#161823]">Nome do Cliente</div>
+            <div id="addr-full-text" class="mt-1 text-[13px] text-[#555]">Rua Exemplo, 123, Bairro, Cidade - UF</div>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-1 h-5 w-5 text-[#c8c8cc]"><path d="m9 18 6-6-6-6"/></svg>
+        </div>
+      </a>
+
+      <!-- Color Ribbon -->
+      <div class="h-[4px] overflow-hidden bg-white" aria-hidden="true">
+        <svg width="100%" height="4" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="tt-ribbon" x="0" y="0" width="64" height="4" patternUnits="userSpaceOnUse">
+              <rect x="2" y="0.75" width="26" height="2.5" rx="0.5" fill="#25f4ee" transform="skewX(-20)"></rect>
+              <rect x="34" y="0.75" width="26" height="2.5" rx="0.5" fill="#fe2c55" transform="skewX(-20)"></rect>
+            </pattern>
+          </defs>
+          <rect width="100%" height="4" fill="url(#tt-ribbon)"></rect>
+        </svg>
+      </div>
+
+      <!-- Product Section -->
+      <div class="bg-white px-4 pt-2.5 pb-3">
+        <div class="flex items-center justify-between">
+          <div class="text-[14px] font-bold text-[#161823]">SOARFLY Tools BR</div>
+          <button class="flex items-center gap-0.5 text-[12px] text-[#8a8b91]">
+            Adicionar nota
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
+
+        <div class="mt-2.5 flex items-center gap-2.5">
+          <img src="/promotiktok.b-cdn.net/media/3a6e2019-320a-446d-9306-bb7daebf9e01/header-1.webp" onerror="this.onerror=null;this.src='/assets/header-1.webp';" alt="Produto" class="h-[80px] w-[80px] shrink-0 rounded-md object-cover"/>
+          <div class="min-w-0 flex-1">
+            <div class="truncate text-[12.5px] leading-snug text-[#161823] font-semibold">[SOARFLY] Kit Ferramentas 4 em 1 48Vf |...</div>
+            <div class="mt-1 flex flex-col items-start gap-1">
+              <div class="inline-flex overflow-hidden rounded-[3px]">
+                <div class="flex items-center gap-0.5 bg-[#fe2c55] px-[7px] py-[2px] text-[8.5px] font-semibold text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="white" stroke="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  <span>Oferta Relâmpago</span>
+                </div>
+                <div id="flash-timer" class="flex items-center bg-[#fff0f3] px-[7px] py-[2px] text-[8.5px] font-semibold text-[#fe2c55] tabular-nums">23:59:10</div>
+              </div>
+              <span class="inline-flex h-[14px] items-center gap-[2px] rounded-[3px] bg-[#f7f7f7] px-[3px] text-[8.3px] font-extrabold leading-none text-[#333333]">
+                <svg width="9" height="9" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0"><circle cx="6.5" cy="6.5" r="6.15" fill="#EAB934"/><path d="M4 6.55L5.85 8.55L9.2 5" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Devolução gratuita
+              </span>
+            </div>
+
+            <div class="mt-1.5 flex items-end justify-between gap-2">
+              <div class="min-w-0">
+                <div class="flex items-center gap-1 text-[#fe2c55]">
+                  <span id="unit-price-display" class="text-[16px] font-extrabold leading-none">R$ 97,90</span>
+                </div>
+                <div class="mt-0.5 flex items-center gap-1 text-[10.5px] text-[#8a8b91]">
+                  <span class="line-through">R$ 326,33</span>
+                  <span class="rounded bg-[#ffe9ec] px-1 py-[1px] font-semibold text-[#fe2c55]">-70%</span>
+                </div>
+              </div>
+              
+              <!-- Quantity Selector -->
+              <div class="flex items-center gap-0 text-[13px] text-[#161823]">
+                <button onclick="changeQty(-1)" class="flex h-6 w-6 items-center justify-center rounded-l-[4px] bg-[#f1f1f2] text-[16px] leading-none text-[#161823] active:bg-[#e0e0e0] cursor-pointer" aria-label="Diminuir">-</button>
+                <span id="qty-val" class="flex h-6 w-8 items-center justify-center bg-[#f1f1f2] text-[12px] tabular-nums font-semibold">1</span>
+                <button onclick="changeQty(1)" class="flex h-6 w-6 items-center justify-center rounded-r-[4px] bg-[#f1f1f2] text-[16px] leading-none text-[#161823] active:bg-[#e0e0e0] cursor-pointer" aria-label="Aumentar">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3 flex items-center justify-between rounded-md bg-[#e7f7f5] px-2.5 py-1.5 text-[11.5px]">
+          <span class="text-[#161823]">Receba até 25 de set. a 30 de set.</span>
+          <span class="flex items-center gap-1.5">
+            <span class="text-[#8a8b91] line-through">R$ 26,60</span>
+            <b class="text-[#161823]">Grátis</b>
+          </span>
+        </div>
+      </div>
+
+      <!-- Coupon Row -->
+      <div class="mt-2 flex w-full items-center justify-between bg-white px-4 py-[9px]">
+        <div class="flex items-center gap-[6px] text-[13px] font-extrabold leading-none text-[#161823]">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#d81d57" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.4 8.05V10.15C19.38 10.34 18.64 11.08 18.64 12C18.64 12.92 19.38 13.66 20.4 13.85V15.95C20.4 16.53 19.93 17 19.35 17H4.65C4.07 17 3.6 16.53 3.6 15.95V13.85C4.62 13.66 5.36 12.92 5.36 12C5.36 11.08 4.62 10.34 3.6 10.15V8.05C3.6 7.47 4.07 7 4.65 7H19.35C19.93 7 20.4 7.47 20.4 8.05Z"/><path d="M8.35 12.1L10.55 14.3L15.75 9.3"/></svg>
+          Desconto do TikTok Shop
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span class="rounded bg-[#e7f7f5] px-1.5 py-0.5 text-[10.5px] font-semibold text-[#00b8a9]">Frete grátis</span>
+          <span class="rounded bg-[#ffe9ec] px-1.5 py-0.5 text-[10.5px] font-semibold text-[#fe2c55]">- R$ 228,43</span>
+        </div>
+      </div>
+
+      <!-- Order Summary -->
+      <div class="mt-2 bg-white px-4 py-3">
+        <div class="text-[14px] font-semibold">Resumo do pedido</div>
+        <div class="mt-3 space-y-2 text-[13px]">
+          <div class="flex items-center justify-between font-semibold">
+            <span>Subtotal do produto</span>
+            <span id="subtotal-display">R$ 97,90</span>
+          </div>
+          <div class="flex items-center justify-between pl-3 text-[13px]">
+            <span class="text-[#5a5b60]">Preço original</span>
+            <span id="original-total-display">R$ 326,33</span>
+          </div>
+          <div class="flex items-center justify-between pl-3 text-[13px]">
+            <span class="text-[#5a5b60]">Desconto no produto</span>
+            <span id="discount-display" class="text-[#fe2c55]">- R$ 228,43</span>
+          </div>
+          <div class="flex items-center justify-between pt-1 font-semibold">
+            <span>Subtotal do envio</span>
+            <span>R$ 0,00</span>
+          </div>
+          <div class="flex items-center justify-between pl-3 text-[13px]">
+            <span class="text-[#5a5b60]">Taxa de envio</span>
+            <span>R$ 26,60</span>
+          </div>
+          <div class="flex items-center justify-between pl-3 text-[13px]">
+            <span class="text-[#5a5b60]">Desconto de envio</span>
+            <span class="text-[#fe2c55]">- R$ 26,60</span>
+          </div>
+        </div>
+
+        <div class="my-3 h-px bg-[#f0f0f0]"></div>
+        <div class="flex items-start justify-between">
+          <div class="text-[16px] font-bold">Total</div>
+          <div class="text-right">
+            <div id="total-summary-display" class="text-[17px] font-bold">R$ 97,90</div>
+            <div class="text-[11px] text-[#8a8b91]">Impostos inclusos</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Method -->
+      <div class="mt-2 bg-white px-4 py-3">
+        <div class="text-[14px] font-semibold">Forma de pagamento</div>
+        <div class="mt-3 flex w-full items-start justify-between text-left">
+          <div class="flex flex-1 items-start gap-2.5">
+            <div class="mt-0.5">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00b8a9" stroke-width="2"><polygon points="12 2 22 12 12 22 2 12 12 2"/></svg>
+            </div>
+            <div class="flex-1">
+              <div class="text-[13px] font-bold">Pix</div>
+              <div class="mt-1 text-[11px] text-[#5a5b60]">Pagamento instantâneo · Aprovação em segundos</div>
+            </div>
+          </div>
+          <span class="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full border-2 border-[#fe2c55] bg-[#fe2c55]">
+            <span class="h-2 w-2 rounded-full bg-white"></span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Terms -->
+      <div class="mt-2 bg-[#f5f5f5] px-4 py-3 text-[11px] leading-relaxed text-[#5a5b60]">
+        Ao fazer um pedido, você concorda com <span class="font-semibold text-[#161823]">Termos de uso e venda do TikTok Shop</span> e reconhece que leu a <span class="font-semibold text-[#161823]">Política de privacidade do TikTok</span>.
+      </div>
+
+      <!-- Bottom Fixed Action Bar -->
+      <div class="fixed inset-x-0 bottom-0 z-40 mx-auto max-w-[440px] bg-white pb-[max(env(safe-area-inset-bottom),6px)] shadow-[0_-1px_0_rgba(0,0,0,0.06)] border-t border-[#f0f0f0]">
+        <div class="flex items-center gap-1.5 bg-[#fff0f3] px-4 py-1 text-[11.5px] font-semibold text-[#fe2c55] whitespace-nowrap">
+          <span class="truncate">Você está economizando <b id="savings-display">R$ 255,03</b> nesse pedido.</span>
+        </div>
+        <div class="flex items-center justify-between px-4 pt-1.5">
+          <div id="items-count-display" class="text-[14px] font-bold text-[#161823]">Total (1 item)</div>
+          <div id="footer-total-display" class="text-[17px] font-extrabold text-[#fe2c55]">R$ 97,90</div>
+        </div>
+        <div class="px-4 pt-1">
+          <button id="btn-fazer-pedido" onclick="handleFazerPedido(event)" class="relative w-full rounded-full bg-[#fe2c55] hover:bg-[#e0264b] py-2.5 text-center text-white shadow-md transition active:scale-[0.99] cursor-pointer">
+            <div class="text-[15px] font-bold leading-tight">Fazer pedido</div>
+            <div id="coupon-exp-text" class="mt-0.5 text-[10.5px] font-semibold leading-tight opacity-95">O cupom expira em 23:59:10</div>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const UNIT_PRICE = 97.90;
+    const ORIGINAL_PRICE = 326.33;
+    let qty = 1;
+    let hasAddress = false;
+
+    function getQueryString() {
+      var s = window.location.search;
+      if (!s || s.length <= 1) {
+        s = sessionStorage.getItem('tiktok_search') || localStorage.getItem('tiktok_search') || '';
+      }
+      return (s && !s.startsWith('?')) ? ('?' + s) : s;
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    function formatBRL(val) {
+      return 'R$ ' + val.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function updateCalculations() {
+      const subtotal = UNIT_PRICE * qty;
+      const originalTotal = ORIGINAL_PRICE * qty;
+      const discount = (ORIGINAL_PRICE - UNIT_PRICE) * qty;
+      const totalSavings = discount + 26.60;
+
+      document.getElementById('qty-val').textContent = qty;
+      document.getElementById('subtotal-display').textContent = formatBRL(subtotal);
+      document.getElementById('original-total-display').textContent = formatBRL(originalTotal);
+      document.getElementById('discount-display').textContent = '- ' + formatBRL(discount);
+      document.getElementById('total-summary-display').textContent = formatBRL(subtotal);
+      document.getElementById('footer-total-display').textContent = formatBRL(subtotal);
+      document.getElementById('savings-display').textContent = formatBRL(totalSavings);
+      document.getElementById('items-count-display').textContent = 'Total (' + qty + ' ' + (qty === 1 ? 'item' : 'itens') + ')';
+
+      try {
+        let currentOrder = {};
+        const stored = localStorage.getItem('tiktokshop:order');
+        if (stored) currentOrder = JSON.parse(stored);
+        currentOrder.qty = qty;
+        currentOrder.productPrice = UNIT_PRICE;
+        localStorage.setItem('tiktokshop:order', JSON.stringify(currentOrder));
+      } catch (e) {}
+    }
+
+    function changeQty(delta) {
+      qty = Math.max(1, Math.min(99, qty + delta));
+      updateCalculations();
+    }
+
+    function loadAddressState() {
+      try {
+        const stored = localStorage.getItem('tiktokshop:order');
+        if (stored) {
+          const o = JSON.parse(stored);
+          if (o.qty) qty = o.qty;
+          if (o.address && o.address.nome && o.address.endereco) {
+            hasAddress = true;
+            const a = o.address;
+            document.getElementById('address-empty').classList.add('hidden');
+            document.getElementById('address-filled').classList.remove('hidden');
+            
+            const maskedPhone = a.telefone ? (' (+55)' + a.telefone.replace(/\D/g, '').slice(0, 2) + '***') : '';
+            document.getElementById('addr-name-phone').textContent = (a.nome || '') + maskedPhone;
+            document.getElementById('addr-full-text').textContent = (a.endereco || '') + ', ' + (a.numero || '') + ' - ' + (a.bairro || '') + ', ' + (a.cidade || '') + ' - ' + (a.estado || '') + ', ' + (a.cep || '');
+          }
+        }
+      } catch (e) {}
+      updateCalculations();
+    }
+
+    function goBack(e) {
+      if (e) e.preventDefault();
+      window.location.href = '/ferramenta' + getQueryString();
+    }
+
+    function goToAddress(e) {
+      if (e) e.preventDefault();
+      window.location.href = '/endereco' + getQueryString();
+    }
+
+    function handleFazerPedido(event) {
+      if (event) event.preventDefault();
+
+      if (!hasAddress) {
+        showToast('Por favor, preencha seu endereço de entrega');
+        setTimeout(() => {
+          window.location.href = '/endereco' + getQueryString();
+        }, 300);
+        return;
+      }
+
+      try {
+        const stored = localStorage.getItem('tiktokshop:order');
+        if (stored) {
+          const o = JSON.parse(stored);
+          if (o.address && window.ttq) {
+            window.ttq.identify({
+              email: o.address.email || '',
+              phone_number: o.address.telefone || ''
+            });
+          }
+        }
+        if (window.ttq) {
+          window.ttq.track('PlaceAnOrder', {
+            content_id: 'prod_0c10f31f770de5d8',
+            content_type: 'product',
+            content_name: '[SOARFLY] Kit Ferramentas 4 em 1 48Vf',
+            quantity: qty,
+            price: UNIT_PRICE,
+            value: UNIT_PRICE * qty,
+            currency: 'BRL'
+          });
+        }
+      } catch(e) {}
+
+      window.location.href = '/pix' + getQueryString();
+    }
+
+    function initTimer() {
+      let now = new Date();
+      let midnight = new Date(now);
+      midnight.setHours(24, 0, 0, 0);
+      let diff = Math.floor((midnight - now) / 1000);
+
+      setInterval(() => {
+        if (diff > 0) diff--;
+        let h = Math.floor(diff / 3600).toString().padStart(2, '0');
+        let m = Math.floor((diff % 3600) / 60).toString().padStart(2, '0');
+        let s = (diff % 60).toString().padStart(2, '0');
+        const str = h + ':' + m + ':' + s;
+        const el1 = document.getElementById('flash-timer');
+        const el2 = document.getElementById('coupon-exp-text');
+        if (el1) el1.textContent = str;
+        if (el2) el2.textContent = 'O cupom expira em ' + str;
+      }, 1000);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadAddressState();
+      initTimer();
+    });
+  </script>
+</body>
+</html>
+

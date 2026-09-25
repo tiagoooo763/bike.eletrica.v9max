@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"/>
+  <title>Pedido Confirmado | TikTok Shop</title>
+  <meta name="theme-color" content="#ffffff"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"/>
+
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: #f3f4f6;
+    }
+    @keyframes check-pop {
+      0% { transform: scale(0.6); opacity: 0; }
+      70% { transform: scale(1.15); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .check-circle-anim {
+      animation: check-pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#e5e5e7]">
+  <div class="mx-auto min-h-screen w-full max-w-[440px] bg-[#f8f9fa] shadow-[0_0_40px_rgba(0,0,0,0.08)] flex flex-col justify-between">
+    <div class="p-5">
+      
+      <!-- Top Success Section -->
+      <div class="pt-6 pb-6 text-center">
+        <div class="check-circle-anim w-20 h-20 rounded-full bg-[#e6f9ed] border-4 border-[#00b94a]/20 flex items-center justify-center mx-auto mb-4 shadow-sm">
+          <svg class="w-10 h-10 text-[#00b94a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <h1 class="text-[21px] font-black text-[#161823] tracking-tight">Pagamento Confirmado!</h1>
+        <p class="text-[13.5px] text-[#73747b] mt-1">Obrigado pela sua compra no TikTok Shop 🎉</p>
+        
+        <div class="mt-4 inline-flex items-center gap-1.5 bg-white px-3.5 py-1.5 rounded-full border border-[#ececec] shadow-sm">
+          <span class="text-[12px] text-[#73747b]">Pedido nº:</span>
+          <span id="order-number-display" class="text-[12.5px] font-bold text-[#161823]">#TK83941029</span>
+        </div>
+      </div>
+
+      <!-- Order Info Cards -->
+      <div class="space-y-3">
+        
+        <!-- Delivery Card -->
+        <div class="bg-white rounded-2xl p-4 flex items-start gap-3.5 border border-[#ececec] shadow-sm">
+          <div class="w-10 h-10 rounded-xl bg-[#e8f2ff] flex items-center justify-center shrink-0">
+            <svg class="w-5 h-5 text-[#0066ff]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 18H3c-.6 0-1-.4-1-1V7c0-.6.4-1 1-1h10c.6 0 1 .4 1 1v11"/>
+              <path d="M14 9h4l4 4v4c0 .6-.4 1-1 1h-2"/>
+              <circle cx="7" cy="18" r="2"/>
+              <circle cx="17" cy="18" r="2"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-[13px] font-bold text-[#161823]">Seu pedido será postado o quanto antes</p>
+            <p class="text-[11.5px] text-[#73747b] mt-0.5 leading-relaxed">Estamos separando e embalando sua <b>Bike Elétrica V9 Max</b> com todo cuidado para envio expresso.</p>
+          </div>
+        </div>
+
+        <!-- Tracking Card -->
+        <div class="bg-white rounded-2xl p-4 flex items-start gap-3.5 border border-[#ececec] shadow-sm">
+          <div class="w-10 h-10 rounded-xl bg-[#fff4e5] flex items-center justify-center shrink-0">
+            <svg class="w-5 h-5 text-[#e67700]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 12h20"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"/><path d="M12 2v20"/><path d="M12 2a5 5 0 0 1 5 5v5H7V7a5 5 0 0 1 5-5z"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-[13px] font-bold text-[#161823]">Código de Rastreamento</p>
+            <p id="tracking-info-text" class="text-[11.5px] text-[#73747b] mt-0.5 leading-relaxed">Seu código: <b id="tracking-code-val" class="text-[#161823] font-mono select-all">BR948271038TS</b></p>
+            <p class="text-[10.5px] text-[#8a8b91] mt-0.5">As atualizações serão notificadas por WhatsApp e E-mail.</p>
+          </div>
+        </div>
+
+        <!-- Email Updates Card -->
+        <div class="bg-white rounded-2xl p-4 flex items-start gap-3.5 border border-[#ececec] shadow-sm">
+          <div class="w-10 h-10 rounded-xl bg-[#f3e8ff] flex items-center justify-center shrink-0">
+            <svg class="w-5 h-5 text-[#872bf5]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 13V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h9"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-[13px] font-bold text-[#161823]">Notificações do Envio</p>
+            <p class="text-[11.5px] text-[#73747b] mt-0.5 leading-relaxed">Você receberá o link de rastreamento e comprovante fiscal diretamente nos seus contatos cadastrados.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Action Button -->
+      <div class="mt-6 space-y-2.5">
+        <a href="../../index.html" class="w-full py-3.5 rounded-xl text-[14.5px] font-bold text-white flex items-center justify-center gap-2 bg-[#fe2c55] hover:bg-[#e0264b] transition active:scale-[0.98] shadow-md cursor-pointer text-center">
+          Voltar para a Loja
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Store Signature Footer -->
+    <div class="bg-white border-t border-[#ececec] p-4 text-center">
+      <p class="text-[12px] font-medium text-[#5a5b60]">A <b>Monster E Bikes</b> agradece pela sua preferência! 💚</p>
+      <p class="text-[11px] text-[#8a8b91] mt-1">CNPJ: 64.482.958/0001-00 · Todos os direitos reservados</p>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        const stored = localStorage.getItem('tiktokshop:order');
+        if (stored) {
+          const o = JSON.parse(stored);
+          if (o.orderNumber) {
+            document.getElementById('order-number-display').textContent = o.orderNumber;
+          }
+          if (o.trackingCode) {
+            document.getElementById('tracking-code-val').textContent = o.trackingCode;
+          } else {
+            const randTrack = 'BR' + Math.floor(100000000 + Math.random() * 900000000) + 'TS';
+            document.getElementById('tracking-code-val').textContent = randTrack;
+          }
+        }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>
