@@ -1,0 +1,38 @@
+[
+  {
+    "id": "2eaad584-c7e6-4176-a4c9-40ffa5a9db7d",
+    "title": "Bicicleta Bike Eletrica V9 Max 1000w 48km Freio Hidraulico",
+    "description": "Bicicleta Elétrica V9 Max 1000W — potência, conforto e tecnologia para seus trajetos\n\nA V9 Max 1000W combina desempenho, autonomia e um visual robusto para quem busca mais praticidade e liberdade na mobilidade do dia a dia.\n\nEquipada com motor elétrico de 1000W, a V9 Max entrega força para deslocamentos urbanos, subidas e diferentes tipos de percurso. Sua bateria de lítio 48V 15,6Ah removível proporciona autonomia para trajetos mais longos e pode ser recarregada com praticidade.\n\nO conjunto conta com freios a disco hidráulicos, oferecendo frenagens mais precisas e maior controle, além de suspensão dianteira e traseira, que ajuda a absorver impactos e proporcionar uma condução mais confortável.\n\nPara quem também gosta de pedalar, o câmbio Shimano de 7 velocidades permite adaptar a marcha ao percurso. Os pneus largos aro 20 contribuem para estabilidade e segurança em diferentes superfícies.",
+    "images": [
+      "/__l5e/assets-v1/a07af9ab-ccef-40e7-b17a-9f386ed2e21c/bike-main-800.webp",
+      "/__l5e/assets-v1/5ba12ad6-849c-4dba-b43c-1af4b718d773/bike-8-800.webp",
+      "/__l5e/assets-v1/b9efe5b6-abb2-4206-81ee-c237dbfdae4e/bike-2-800.webp",
+      "/__l5e/assets-v1/cb5ac39c-f143-41a1-92d4-09f56ebc7149/bike-7-800.webp",
+      "/__l5e/assets-v1/cf38f1c0-386c-42a9-a60d-c85ac9b9da09/bike-1-800.webp",
+      "/__l5e/assets-v1/c1602c95-3bfd-4ad9-bb50-de415cd8d94b/bike-5-800.webp",
+      "/__l5e/assets-v1/1fddc677-083f-4ee7-af6b-de27a6afe972/bike-4-800.webp",
+      "/__l5e/assets-v1/23614e7d-e661-4f7f-96b1-6b29cbc38b55/bike-6-800.webp"
+    ],
+    "cart_image": "/__l5e/assets-v1/a07af9ab-ccef-40e7-b17a-9f386ed2e21c/bike-main-800.webp",
+    "variants": [
+      {
+        "label": "Preto",
+        "price": 89.75,
+        "stock": 5,
+        "oldPrice": 899.9
+      }
+    ],
+    "variant_label": "Cor",
+    "rating": 4.8,
+    "rating_count": 548,
+    "sold_count": 0,
+    "default_variant": 0,
+    "badges": [
+      "Frete grátis"
+    ],
+    "is_active": true,
+    "created_at": "2026-09-24T00:15:26.241953+00:00",
+    "updated_at": "2026-09-24T09:34:41.027468+00:00",
+    "models": []
+  }
+]
